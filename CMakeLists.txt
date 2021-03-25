@@ -20,6 +20,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/source)
 
 # make
 add_library(zita-resampler ${SOURCES} ${HEADER_LIST})
+if(WIN32)
+find_package(Threads REQUIRED)
+target_link_libraries(zita-resampler Threads::Threads)
+endif()
 
 
 # CMake package config
