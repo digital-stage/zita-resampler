@@ -1,0 +1,25 @@
+# First version of conanfile
+# Only Windows uses this.
+# 
+# Build zita-resampler on Windows only after running conan install:
+#
+# mkdir builds
+# cd builds
+# conan install ..
+#
+# we use the CMake multi generator and the find_package_multi for Visual Studio
+#
+# This creates a Findpthreads4w.cmake file in the binary directory
+# Use it by specifying -DCMAKE_MODULE_PATH=builds when configuring the project
+#
+[requires]
+# This dependency is required for Windows only. How to do this with Conan?
+pthreads4w/3.0.0
+
+[generators]
+# For Windows, we will use cmake-multi, because you have debug and release in one cmake file
+cmake_multi
+cmake_paths
+cmake_find_package_multi
+# On Linux, we'd like to use simple cmake
+# cmake
