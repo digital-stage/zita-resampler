@@ -49,6 +49,11 @@ if(ZITA_RESAMPLER_TESTS)
     target_link_libraries(zita-resampler-upstest PUBLIC zita-resampler ${LIB_THREADS})
 endif()
 
+
+#
+# The whole packaging code below is broken because it does not ship the include files, just the binary library. 
+# I think with the conanfile.py in place, all of this can go away.
+#
 # CMake package config
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
