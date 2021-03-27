@@ -12,7 +12,12 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - uses: turtlebrowser/get-conan@main
+      name: Install Conan
+      id: conan
     - uses: actions/checkout@v2
+    - name: Conan install
+      run: conan install
     - name: cmake
       run: cmake .
     - name: make
