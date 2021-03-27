@@ -1,3 +1,4 @@
+# https://cristianadam.eu/20191222/using-github-actions-with-c-plus-plus-and-cmake/
 name: CMake Build Matrix
 
 on: [push]
@@ -11,9 +12,10 @@ jobs:
       matrix:
         config:
         - {
-            name: "Windows Latest MinGW", artifact: "Windows-MinGW.tar.xz",
+            name: "Windows Latest MSVC", artifact: "Windows-MSVC.tar.xz",
             os: windows-latest,
-            build_type: "Release", cc: "gcc", cxx: "g++"
+            build_type: "Release", cc: "cl", cxx: "cl"
+            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           }
         - {
             name: "Ubuntu Latest GCC", artifact: "Linux.tar.xz",
@@ -70,6 +72,13 @@ jobs:
             COMMAND chmod +x ${cmake_dir}/cmake
           )
         endif()
+
+    - name: Install Conan
+      uses: turtlebrowser/get-conan@main
+      id: conan
+
+    - name: Conan install
+      run: conan install
 
     - name: Configure
       shell: cmake -P {0}
