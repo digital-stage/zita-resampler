@@ -158,11 +158,14 @@ jobs:
     - name: Conan create package
       run: conan create .
 
+    - uses: grisumbras/locate-conan-package@latest
+      id: locate_package
+
     - name: Upload
       uses: actions/upload-artifact@v1
       with:
-        path: ./${{ matrix.config.artifact }}
-        name: ${{ matrix.config.artifact }}
+        name: artifacts-${{ matrix.os }}
+        path: ${{ steps.locate_package.outputs.path }}
 
   release:
     if: contains(github.ref, 'tags/v')
