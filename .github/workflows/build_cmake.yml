@@ -156,10 +156,11 @@ jobs:
 
 
     - name: Conan create package
-      run: conan create .
+      run: conan create . christofmuc/stable
 
     - uses: grisumbras/locate-conan-package@latest
       id: locate_package
+      channel: stable
 
     - name: Upload
       uses: actions/upload-artifact@v1
