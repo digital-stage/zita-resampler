@@ -4,6 +4,8 @@
 #include <zita-resampler/resampler.h>
 #include <zita-resampler/vresampler.h>
 
+#include "clock_gettime_windows.h"
+
 
 #define NCHAN 7
 #define CHAN  3

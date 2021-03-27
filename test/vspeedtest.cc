@@ -23,10 +23,12 @@
 #include <stdio.h>
 #include <zita-resampler/vresampler.h>
 
+#include "clock_gettime_windows.h"
+
 
 #define LINP 10000
 #define LOUT 11000
-#define ITER 1000
+#define ITER 1000000
 
 
 int main (int ac, char *av[])
