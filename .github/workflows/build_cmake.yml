@@ -166,7 +166,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v1
       with:
-        name: artifacts-${{ matrix.os }}
+        name: artifacts-${{ matrix.config.os }}
         path: ${{ steps.locate_package.outputs.path }}
 
   release:
@@ -196,8 +196,8 @@ jobs:
         name: upload_url
 
   publish:
+    name: Publish ${{ matrix.config.name }}
     if: contains(github.ref, 'tags/v')
-    name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
