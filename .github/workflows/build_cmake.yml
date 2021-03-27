@@ -78,7 +78,7 @@ jobs:
       id: conan
 
     - name: Conan install
-      run: conan install -if build
+      run: conan install . -if build
 
     - name: Configure
       shell: cmake -P {0}
