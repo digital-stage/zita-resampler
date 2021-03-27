@@ -28,19 +28,23 @@ if(WIN32)
 add_definitions(-D_USE_MATH_DEFINES)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_BINARY_DIR})
 find_package(pthreads4w REQUIRED)
-target_link_libraries(zita-resampler PUBLIC pthreads4w::pthreads4w)
+set(LIB_THREADS pthreads4w::pthreads4w)
+target_link_libraries(zita-resampler PUBLIC ${LIB_THREADS})
+else()
+find_package(Threads)
+set(LIB_THREADS Threads::Threads)
 endif()
 
 if(ZITA_RESAMPLER_TESTS)
 # Test exeuctables
 add_executable(zita-resampler-speedtest test/speedtest.cc test/clock_gettime_windows.h)
-target_link_libraries(zita-resampler-speedtest PUBLIC zita-resampler pthreads4w::pthreads4w)
+target_link_libraries(zita-resampler-speedtest PUBLIC zita-resampler ${LIB_THREADS})
 
 add_executable(zita-resampler-vspeedtest test/vspeedtest.cc test/clock_gettime_windows.h)
-target_link_libraries(zita-resampler-vspeedtest PUBLIC zita-resampler pthreads4w::pthreads4w)
+target_link_libraries(zita-resampler-vspeedtest PUBLIC zita-resampler ${LIB_THREADS})
 
 add_executable(zita-resampler-upstest test/upstest.cc test/clock_gettime_windows.h)
-target_link_libraries(zita-resampler-upstest PUBLIC zita-resampler pthreads4w::pthreads4w)
+target_link_libraries(zita-resampler-upstest PUBLIC zita-resampler ${LIB_THREADS})
 
 endif()
 
