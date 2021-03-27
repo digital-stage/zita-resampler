@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.16.0)
+
 project(zita-resampler VERSION 1.8.0)
+
+option(ZITA_RESAMPLER_TESTS "Build zita-resampler code in test directory" ON)
 
 add_definitions(-DVERSION="${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
 
@@ -28,6 +31,18 @@ find_package(pthreads4w REQUIRED)
 target_link_libraries(zita-resampler PUBLIC pthreads4w::pthreads4w)
 endif()
 
+if(ZITA_RESAMPLER_TESTS)
+# Test exeuctables
+add_executable(zita-resampler-speedtest test/speedtest.cc test/clock_gettime_windows.h)
+target_link_libraries(zita-resampler-speedtest PUBLIC zita-resampler pthreads4w::pthreads4w)
+
+add_executable(zita-resampler-vspeedtest test/vspeedtest.cc test/clock_gettime_windows.h)
+target_link_libraries(zita-resampler-vspeedtest PUBLIC zita-resampler pthreads4w::pthreads4w)
+
+add_executable(zita-resampler-upstest test/upstest.cc test/clock_gettime_windows.h)
+target_link_libraries(zita-resampler-upstest PUBLIC zita-resampler pthreads4w::pthreads4w)
+
+endif()
 
 # CMake package config
 include(GNUInstallDirs)
