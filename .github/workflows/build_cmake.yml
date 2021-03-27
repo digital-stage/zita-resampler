@@ -95,7 +95,6 @@ jobs:
             COMMAND ${{ steps.install_cmake.outputs.cmake_dir }}/cmake
               -S .
               -B build
-              --config ${{ matrix.config.build_type }}
             RESULT_VARIABLE result
           )
         else()
@@ -124,10 +123,17 @@ jobs:
           endforeach()
         endif()
 
-        execute_process(
-          COMMAND ${{ steps.install_cmake.outputs.cmake_dir }}/cmake --build build
-          RESULT_VARIABLE result
-        )
+        if ("${{ runner.os }}" STREQUAL "Windows")
+          execute_process(
+            COMMAND ${{ steps.install_cmake.outputs.cmake_dir }}/cmake --build build --config ${{ matrix.config.build_type }}
+            RESULT_VARIABLE result
+          )
+        else()
+          execute_process(
+            COMMAND ${{ steps.install_cmake.outputs.cmake_dir }}/cmake --build build 
+            RESULT_VARIABLE result
+          )
+        endif()
         if (NOT result EQUAL 0)
           message(FATAL_ERROR "Bad exit status")
         endif()
