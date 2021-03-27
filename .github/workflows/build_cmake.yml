@@ -160,7 +160,8 @@ jobs:
 
     - uses: grisumbras/locate-conan-package@latest
       id: locate_package
-      channel: stable
+      with:
+        channel: stable
 
     - name: Upload
       uses: actions/upload-artifact@v1
