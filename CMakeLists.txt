@@ -23,6 +23,7 @@ add_library(zita-resampler ${SOURCES} ${HEADER_LIST})
 
 if(WIN32)
 add_definitions(-D_USE_MATH_DEFINES)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_BINARY_DIR})
 find_package(pthreads4w REQUIRED)
 target_link_libraries(zita-resampler PUBLIC pthreads4w::pthreads4w)
 endif()

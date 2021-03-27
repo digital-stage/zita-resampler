@@ -4,6 +4,8 @@ Zita-resampler is a C++ library for sample rate conversion of
 audio signals. Full documentation is available in HTML format,
 see the 'docs' directory.
 
+This link should be from the original source: https://kokkinizita.linuxaudio.org/linuxaudio/zita-resampler/resampler.html
+
 
 Release 1.8.0  (30/12/2020)
 ---------------------------
